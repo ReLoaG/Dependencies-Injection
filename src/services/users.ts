@@ -5,6 +5,8 @@ export class Users {
   http: HTTP;
   apiConfig: ApiConfig;
 
+  static $inject = ['http', 'config'];
+
   constructor(apiConfig: ApiConfig) {
     this.http = new HTTP(apiConfig);
     this.apiConfig = apiConfig;
