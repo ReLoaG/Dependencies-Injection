@@ -1,14 +1,18 @@
-import { Users } from './services/users';
-import { Logger } from './services/logger';
+import {Logger} from './services/logger';
 
 import {createIoCContainer, IoCResources} from "./ioc";
 
-import type { User, ApiConfig } from './types';
+import type {User} from './types';
 import IoCContainer from "ioc-lite";
 
 const renderUsers = async (ioc: IoCContainer<IoCResources>) => {
-  const config = ioc.resolve('config');
-  const usersService = new Users(config);
+
+    // This is somehow working without resolving the logger and http,
+    // I failed to find the true reason of it and will be very grateful to you if you can explain it to me
+    // ioc.resolve('logger');
+    // ioc.resolve('http');
+
+  const usersService = ioc.resolve('userService');
   const users = await usersService.getUsers();
 
   const listNode = document.getElementById('users-list');
